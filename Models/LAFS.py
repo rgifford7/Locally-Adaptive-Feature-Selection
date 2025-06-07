@@ -59,7 +59,7 @@ class LAFS(nn.Module):
         super().__init__()  
 
         self.n_channels = n_channels
-        self.k = sequence_length
+        self.k = k
         self.heads =lafs_heads
 
 
@@ -80,7 +80,7 @@ class LAFS(nn.Module):
         # self.weights[0].bias.data = torch.ones((n_channels*self.heads))/n_channels
         self.attention_across_time = Attention(n_channels,attention_heads)
 
-        self.attention_across_channels = Attention(self.k,attention_heads)
+        self.attention_across_channels = Attention(sequence_length,attention_heads)
 
         
     def gather_channels(self,x, weights):
